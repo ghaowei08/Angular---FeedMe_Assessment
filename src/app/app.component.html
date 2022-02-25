@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="row justify-content-around">
+    <div class="row col-4" style="background-color: red;">
+      <div class="col-6">
+        <button (click)="onHandleOrder('normal')">New Normal Order</button>
+      </div>
+      <div class="col-6">
+        <button (click)="onHandleOrder('vip')">New VIP Order</button>
+      </div>
+    </div>
+    <div class="row col-4" style="background-color: gray; height: 500px;">
+      <div class="col-6" style="border: 1px solid black;">
+        Pending
+        <div class="row">
+          <label class="col-12" *ngFor="let i of cookingList">{{i}}</label>
+          <hr>
+          <label class="col-12" *ngFor="let i of pendingList">{{i}}</label>
+        </div>
+      </div>
+      <div class="col-6" style="border: 1px solid black;">
+        Success
+        <div class="row">
+          <label class="col-12" *ngFor="let i of successList">{{i}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="row col-4" style="background-color: yellow;">
+      <div class=" row col-8">
+        <!-- <i *ngFor="let i of counter(pan); let x = index" class='fas fa-drum-steelpan col-4' style='font-size:24px;'>{{cookingList[x]}}</i> -->
+        <label class="col-4" *ngFor="let x of counter(pan); let i = index">Pan {{i+1}} - {{cookingList[i]}}</label>
+      </div>
+      <div class="col-4 row">
+        <div class="col-2">
+          <button (click)="onAddorMinus('add')">+</button>
+        </div>
+        <div class="col-2">
+          <button (click)="onAddorMinus('minus')">-</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
