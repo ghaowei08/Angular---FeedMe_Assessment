@@ -9,12 +9,13 @@ export class AppComponent implements OnInit {
   pendingList = [];
   successList = [];
   cookingList = [];
-  latestTimeout;
-  pan: number = 3;
+  bot: number = 3;
   id: number = 1;
   vid: number = 1;
 
-  ngOnInit() {}
+  ngOnInit() { 
+    
+  }
 
   counter(i: number) {
     return new Array(i);
@@ -37,34 +38,38 @@ export class AppComponent implements OnInit {
   }
 
   onCooking() {
-    if (this.cookingList.length < this.pan) {
-      this.cookingList.push(this.pendingList[0]);
-      this.pendingList = this.pendingList.filter(
-        (list) => list != this.pendingList[0] && list != undefined
-      );
+    if (this.cookingList.length < this.bot && this.pendingList.length != 0) {
+
       let timeout = setTimeout(() => {
+        // Move cooking to success
         this.successList.push(this.cookingList[0]);
+        clearTimeout(this.cookingList[0].timeout);
         this.cookingList = this.cookingList.filter(
           (list) => list != this.cookingList[0] && list != undefined
         );
+        // After bot is free, check pending
         if (this.pendingList.length != 0) this.onCooking();
-        clearTimeout(timeout);
-      }, 5000);
-      this.latestTimeout = timeout;
+      }, 10000);
+
+      // Move pending to cooking
+      this.cookingList.push({ id: this.pendingList[0], timeout });
+      this.pendingList = this.pendingList.filter(
+        (list) => list != this.pendingList[0] && list != undefined
+      );
     }
   }
 
   onAddorMinus(type) {
     if (type == 'add') {
-      this.pan++;
-      this.onCooking();
+      this.bot++;
     } else if (type == 'minus') {
-      this.pan--;
-      if (this.cookingList.length > this.pan) {
-        this.pendingList.unshift(this.cookingList[this.cookingList.length - 1]);
+      this.bot--;
+      if (this.cookingList.length > this.bot) {
+        this.pendingList.unshift(this.cookingList[this.cookingList.length - 1].id);
+        clearTimeout(this.cookingList[this.cookingList.length - 1].timeout)
         this.cookingList.pop();
-        clearTimeout(this.latestTimeout);
       }
     }
+    this.onCooking();
   }
 }

@@ -1,42 +1,41 @@
 <div class="container-fluid">
-  <div class="row justify-content-around">
-    <div class="row col-4" style="background-color: red;">
+  <div class="row justify-content-around" style="height: 800px;">
+    <div class="d-flex flex-column col-4 justify-content-around">
       <div class="col-6">
-        <button (click)="onHandleOrder('normal')">New Normal Order</button>
+        <button class="btn btn-info" (click)="onHandleOrder('normal')">New Normal Order</button>
       </div>
       <div class="col-6">
-        <button (click)="onHandleOrder('vip')">New VIP Order</button>
+        <button class="btn btn-dark" (click)="onHandleOrder('vip')">New VIP Order</button>
       </div>
     </div>
-    <div class="row col-4" style="background-color: gray; height: 500px;">
+    <div class="row col-4">
       <div class="col-6" style="border: 1px solid black;">
-        Pending
+        <b>Pending</b>
         <div class="row">
-          <label class="col-12" *ngFor="let i of cookingList">{{i}}</label>
+          <label class="col-12" *ngFor="let i of cookingList">{{i.id}}</label>
           <hr>
           <label class="col-12" *ngFor="let i of pendingList">{{i}}</label>
         </div>
       </div>
       <div class="col-6" style="border: 1px solid black;">
-        Success
+        <b>Success</b>
         <div class="row">
-          <label class="col-12" *ngFor="let i of successList">{{i}}</label>
+          <label class="col-12" *ngFor="let i of successList">{{i.id}}</label>
         </div>
       </div>
     </div>
-    <div class="row col-4" style="background-color: yellow;">
-      <div class=" row col-8">
-        <!-- <i *ngFor="let i of counter(pan); let x = index" class='fas fa-drum-steelpan col-4' style='font-size:24px;'>{{cookingList[x]}}</i> -->
-        <div class="col-4" *ngFor="let x of counter(pan); let i = index">
-          <label class="">Pan {{i+1}} - {{cookingList[i]}}</label>
+    <div class="row col-4">
+      <div class=" row col-10">
+        <div class="col-4" *ngFor="let x of counter(bot); let i = index">
+          <label class=""><b>Bot</b> - {{(cookingList[i]) ? cookingList[i].id: ''}}</label>
         </div>
       </div>
-      <div class="col-4 row">
-        <div class="col-2">
-          <button (click)="onAddorMinus('add')">+</button>
+      <div class="col-2 d-flex flex-column justify-content-around">
+        <div>
+          <button class="btn btn-info" (click)="onAddorMinus('add')" style="font-size: 24px;">+</button>
         </div>
-        <div class="col-2">
-          <button (click)="onAddorMinus('minus')">-</button>
+        <div>
+          <button class="btn btn-danger" (click)="onAddorMinus('minus')" style="font-size: 24px;">-</button>
         </div>
       </div>
     </div>
