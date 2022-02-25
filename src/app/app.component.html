@@ -27,7 +27,9 @@
     <div class="row col-4" style="background-color: yellow;">
       <div class=" row col-8">
         <!-- <i *ngFor="let i of counter(pan); let x = index" class='fas fa-drum-steelpan col-4' style='font-size:24px;'>{{cookingList[x]}}</i> -->
-        <label class="col-4" *ngFor="let x of counter(pan); let i = index">Pan {{i+1}} - {{cookingList[i]}}</label>
+        <div class="col-4" *ngFor="let x of counter(pan); let i = index">
+          <label class="">Pan {{i+1}} - {{cookingList[i]}}</label>
+        </div>
       </div>
       <div class="col-4 row">
         <div class="col-2">
